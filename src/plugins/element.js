@@ -28,7 +28,10 @@ import {
   Tree,
   Select,
   Option,
-  Cascader
+  Cascader,
+  Alert,
+  Tabs,
+  TabPane
 } from 'element-ui'
 
 // Vue.use()将引入的组件设为全局可用
@@ -59,6 +62,10 @@ Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane);
+
 // Message组件需要进行全局挂载
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
