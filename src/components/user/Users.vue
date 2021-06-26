@@ -295,9 +295,9 @@ export default {
       const { data: res } = await this.$http.get('users', {
         params: this.queryInfo
       })
-      if (res.meta.status != 200)
+      if (res.meta.status !== 200) {
         return this.$message.error('获取用户列表失败！')
-
+      }
       this.userList = res.data.users
       this.total = res.data.total
     },
@@ -305,7 +305,7 @@ export default {
       const { data: res } = await this.$http.put(
         `users/${row.id}/state/${row.mg_state}`
       )
-      if (res.meta.status != 200) {
+      if (res.meta.status !== 200) {
         row.mg_state = !row.mg_state
         return this.$message.error('修改状态失败！')
       }
@@ -332,7 +332,8 @@ export default {
         if (!valid) return
         // 表单校验通过，可以发起添加用户的请求
         const { data: res } = await this.$http.post('users', this.addForm)
-        if (res.meta.status != 201) return this.$message.error('添加用户失败！')
+        if (res.meta.status !== 201)
+          return this.$message.error('添加用户失败！')
         this.$message.success('添加用户成功！')
         // 隐藏添加用户的对话框
         this.addDialogVisible = false
@@ -377,7 +378,7 @@ export default {
     },
     // 根据id删除用户
     async removeUserById(id) {
-      //弹出确定取消框，是否删除用户
+      // 弹出确定取消框，是否删除用户
       const confirmResult = await this.$confirm(
         '此操作将永久删除该用户, 是否继续?',
         '提示',
@@ -387,13 +388,13 @@ export default {
           type: 'warning'
         }
       ).catch(err => err)
-      //如果用户点击确认，则confirmResult 为'confirm'
-      //如果用户点击取消, 则confirmResult获取的就是catch的错误消息'cancel'
+      // 如果用户点击确认，则confirmResult 为'confirm'
+      // 如果用户点击取消, 则confirmResult获取的就是catch的错误消息'cancel'
       if (confirmResult == 'cancel') return this.$message.info('已取消删除!')
 
       const { data: res } = await this.$http.delete('users/' + id)
 
-      if (res.meta.status != 200) {
+      if (res.meta.status !== 200) {
         return this.$message.error('删除失败！')
       }
       this.$message.success('删除成功！')
@@ -430,9 +431,9 @@ export default {
       this.setRoleDialogVisible = false
     },
     // 监听分配角色对话框的关闭事件
-    setRoleDialogClosed(){
-      this.seletedRoleId=''
-      this.userInfo={}
+    setRoleDialogClosed() {
+      this.seletedRoleId = ''
+      this.userInfo = {}
     }
   }
 }
