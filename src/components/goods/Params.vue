@@ -25,6 +25,7 @@
             :props="cateProps"
             v-model="selectedCateKeys"
             @change="handleChange"
+            height="800px"
           >
           </el-cascader>
         </el-col>

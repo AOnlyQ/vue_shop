@@ -10,6 +10,7 @@ import Cates from './components/goods/Cate.vue'
 import Params from './components/goods/Params.vue'
 import GoodsList from './components/goods/List.vue'
 import Add from './components/goods/Add.vue'
+import Order from './components/order/Order.vue'
 Vue.use(Router)
 
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
@@ -33,7 +34,8 @@ const router = new Router({
         { path: '/categories', component: Cates },
         { path: '/params', component: Params },
         { path: '/goods', component: GoodsList },
-        { path: '/goods/add', component: Add }
+        { path: '/goods/add', component: Add },
+        { path: '/orders', component: Order }
       ]
     }
   ]

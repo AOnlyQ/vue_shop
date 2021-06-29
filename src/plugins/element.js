@@ -36,7 +36,9 @@ import {
   Step,
   CheckboxGroup,
   Checkbox,
-  Upload
+  Upload,
+  // TimeLine,
+  // TimelineItem
 } from 'element-ui'
 
 // Vue.use()将引入的组件设为全局可用
@@ -75,6 +77,8 @@ Vue.use(Step)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Upload)
+// Vue.use(Timeline)
+// Vue.use(TimelineItem);
 // Message组件需要进行全局挂载
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
