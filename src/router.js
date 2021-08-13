@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from './components/Login.vue'
-import Home from './components/Home.vue'
-import Welcome from './components/Welcome.vue'
+
+const Login = () => import(/* webpackChunkName: "Login_Home_Welcome" */ './components/Login.vue')
+const Home = () => import(/* webpackChunkName: "Login_Home_Welcome" */ './components/Home.vue')
+const Welcome = () => import(/* webpackChunkName: "Login_Home_Welcome" */ './components/Welcome.vue')
+// import Login from './components/Login.vue'
+// import Home from './components/Home.vue'
+// import Welcome from './components/Welcome.vue'
+
 import Users from './components/user/Users.vue'
 import Rights from './components/power/Rights.vue'
 import Roles from './components/power/Roles.vue'
@@ -37,7 +42,7 @@ const router = new Router({
         { path: '/goods', component: GoodsList },
         { path: '/goods/add', component: Add },
         { path: '/orders', component: Order },
-        { path: '/reports',component: Report}
+        { path: '/reports', component: Report }
       ]
     }
   ]

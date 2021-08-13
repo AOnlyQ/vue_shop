@@ -36,7 +36,7 @@ import {
   Step,
   CheckboxGroup,
   Checkbox,
-  Upload,
+  Upload
   // TimeLine,
   // TimelineItem
 } from 'element-ui'

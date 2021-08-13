@@ -9,22 +9,10 @@
     <!-- 卡片区 -->
     <el-card>
       <!-- 警告条 -->
-      <el-alert
-        title="添加商品信息"
-        type="info"
-        center
-        show-icon
-        :closable="false"
-      >
-      </el-alert>
+      <el-alert title="添加商品信息" type="info" center show-icon :closable="false"> </el-alert>
 
       <!-- 步骤条 -->
-      <el-steps
-        :space="200"
-        :active="activeIndex - 0"
-        finish-status="success"
-        align-center
-      >
+      <el-steps :space="200" :active="activeIndex - 0" finish-status="success" align-center>
         <el-step title="基本信息"></el-step>
         <el-step title="商品参数"></el-step>
         <el-step title="商品属性"></el-step>
@@ -33,19 +21,8 @@
         <el-step title="完成"></el-step>
       </el-steps>
       <!-- Tab栏 -->
-      <el-form
-        :model="addForm"
-        :rules="addFormRules"
-        ref="addFormRef"
-        label-width="100px"
-        label-position="top"
-      >
-        <el-tabs
-          :tab-position="'left'"
-          v-model="activeIndex"
-          :before-leave="beforeTabLeave"
-          @tab-click="tabClicked"
-        >
+      <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px" label-position="top">
+        <el-tabs :tab-position="'left'" v-model="activeIndex" :before-leave="beforeTabLeave" @tab-click="tabClicked">
           <el-tab-pane label="基本信息" name="0">
             <el-form-item label="商品名称" prop="goods_name">
               <el-input v-model="addForm.goods_name"></el-input>
@@ -61,59 +38,31 @@
             </el-form-item>
             <el-form-item label="商品分类">
               <!-- 级联选择器 -->
-              <el-cascader
-                expandTrigger="hover"
-                v-model="addForm.goods_cat"
-                :options="cateList"
-                :props="cateProps"
-                @change="handleChange"
-              ></el-cascader>
+              <el-cascader expandTrigger="hover" v-model="addForm.goods_cat" :options="cateList" :props="cateProps" @change="handleChange"></el-cascader>
             </el-form-item>
           </el-tab-pane>
           <el-tab-pane label="商品参数" name="1">
-            <el-form-item
-              v-for="item in manyTableData"
-              :key="item.attr_id"
-              :label="item.attr_name"
-            >
+            <el-form-item v-for="item in manyTableData" :key="item.attr_id" :label="item.attr_name">
               <el-checkbox-group v-model="item.attr_vals">
-                <el-checkbox
-                  :label="cb"
-                  v-for="(cb, index) in item.attr_vals"
-                  :key="index"
-                  border
-                ></el-checkbox>
+                <el-checkbox :label="cb" v-for="(cb, index) in item.attr_vals" :key="index" border></el-checkbox>
               </el-checkbox-group>
             </el-form-item>
           </el-tab-pane>
           <el-tab-pane label="商品属性" name="2">
-            <el-form-item
-              v-for="item in onlyTableData"
-              :key="item.attr_id"
-              :label="item.attr_name"
-            >
+            <el-form-item v-for="item in onlyTableData" :key="item.attr_id" :label="item.attr_name">
               <el-input v-model="item.attr_vals"></el-input>
             </el-form-item>
           </el-tab-pane>
           <el-tab-pane label="商品图片" name="3">
             <!-- action表示图片要上传的后台API地址 -->
-            <el-upload
-              :action="uploadURL"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              list-type="picture"
-              :headers="headerObj"
-              :on-success="handleSuccess"
-            >
+            <el-upload :action="uploadURL" :on-preview="handlePreview" :on-remove="handleRemove" list-type="picture" :headers="headerObj" :on-success="handleSuccess">
               <el-button size="small" type="primary">点击上传</el-button>
             </el-upload>
           </el-tab-pane>
           <el-tab-pane label="商品内容" name="4">
             <!-- 富文本编辑器 -->
             <quill-editor v-model="addForm.goods_introduce"></quill-editor>
-            <el-button type="primary" @click="addGood" class="btnAdd"
-              >添加商品</el-button
-            >
+            <el-button type="primary" @click="addGood" class="btnAdd">添加商品</el-button>
           </el-tab-pane>
         </el-tabs>
       </el-form>
@@ -149,18 +98,10 @@ export default {
       },
       // 添加商品表单验证规则对象
       addFormRules: {
-        goods_name: [
-          { required: true, message: '请输入商品名称', trigger: 'blur' }
-        ],
-        goods_price: [
-          { required: true, message: '请输入商品价格', trigger: 'blur' }
-        ],
-        goods_weight: [
-          { required: true, message: '请输入商品重量', trigger: 'blur' }
-        ],
-        goods_number: [
-          { required: true, message: '请输入商品数量', trigger: 'blur' }
-        ]
+        goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
+        goods_price: [{ required: true, message: '请输入商品价格', trigger: 'blur' }],
+        goods_weight: [{ required: true, message: '请输入商品重量', trigger: 'blur' }],
+        goods_number: [{ required: true, message: '请输入商品数量', trigger: 'blur' }]
       },
       // 商品分类列表
       cateList: [],
@@ -211,29 +152,22 @@ export default {
     // tab 被选中时触发
     async tabClicked() {
       if (this.activeIndex === '1') {
-        const { data: res } = await this.$http.get(
-          `categories/${this.cateId}/attributes`,
-          {
-            params: { sel: 'many' }
-          }
-        )
+        const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes`, {
+          params: { sel: 'many' }
+        })
         if (res.meta.status !== 200) {
           return this.$message.error('获取动态参数数据失败！')
         }
 
         res.data.forEach(item => {
-          item.attr_vals =
-            item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
+          item.attr_vals = item.attr_vals.length === 0 ? [] : item.attr_vals.split(' ')
         })
         this.manyTableData = res.data
         // console.log(this.manyTableData)
       } else if (this.activeIndex === '2') {
-        const { data: res } = await this.$http.get(
-          `categories/${this.cateId}/attributes`,
-          {
-            params: { sel: 'only' }
-          }
-        )
+        const { data: res } = await this.$http.get(`categories/${this.cateId}/attributes`, {
+          params: { sel: 'only' }
+        })
         if (res.meta.status !== 200) {
           return this.$message.error('获取动态参数数据失败！')
         }
@@ -248,7 +182,7 @@ export default {
       this.previewPath = file.response.data.url
       this.picPreviewVisible = true
     },
-    //上传项移除的处理函数
+    // 上传项移除的处理函数
     handleRemove(file) {
       console.log(file)
       // 1.找到要删除的图片的临时路径
@@ -292,14 +226,13 @@ export default {
         })
         form.attrs = this.addForm.attrs
         // console.log(form)
-        const { data: res } = await this.$http.post('goods',form)
-        console.log(res);
+        const { data: res } = await this.$http.post('goods', form)
+        console.log(res)
         if (res.meta.status !== 201) {
           return this.$message.error('添加商品失败！')
         }
         this.$message.success('添加商品成功!')
         this.$router.push('/goods')
-        
       })
     }
   },

@@ -118,7 +118,7 @@ export default {
     return {
       // 商品分类数据列表
       catesList: [],
-      //查询分类数据的条件
+      // 查询分类数据的条件
       queryInfo: {
         type: 3,
         // 当前页码值
@@ -241,7 +241,7 @@ export default {
         ]
         // 为当前分类的等级赋值
         this.addCateForm.cat_level = this.selectedKeys.length
-        return
+        // return
       } else {
         this.addCateForm.cat_pid = 0
         // 为当前分类的等级赋值

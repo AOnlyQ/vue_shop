@@ -364,7 +364,7 @@ export default {
             attr_sel: this.activeName
           }
         )
-        if (res.meta.status != 201) {
+        if (res.meta.status !== 201) {
           return this.$message.error('添加失败！')
         }
         this.$message.success('添加成功!')
@@ -373,9 +373,9 @@ export default {
       })
     },
     // 点击按钮，显示修改参数的对话框
-    async showEditDialog(attr_id) {
+    async showEditDialog(attrId) {
       const { data: res } = await this.$http.get(
-        `categories/${this.cateId}/attributes/${attr_id}`,
+        `categories/${this.cateId}/attributes/${attrId}`,
         {
           params: { attr_sel: this.activeName }
         }
@@ -410,7 +410,7 @@ export default {
       })
     },
     // 根据id删除对应的参数项
-    async removeParams(attr_id) {
+    async removeParams(attrId) {
       const confirmResult = await this.$confirm(
         '此操作将永久删除该参数, 是否继续?',
         '提示',
@@ -422,7 +422,7 @@ export default {
       ).catch(err => err)
       if (confirmResult === 'cancel') return this.$message('已取消删除！')
       const { data: res } = await this.$http.delete(
-        `categories/${this.cateId}/attributes/${attr_id}`
+        `categories/${this.cateId}/attributes/${attrId}`
       )
       if (res.meta.status !== 200) {
         return this.$message.error('删除参数失败！')
@@ -446,8 +446,6 @@ export default {
     },
     // 将对attr_vals的操作保存到数据库中
     async saveAttrVals(row) {
-      
-
       // 发送请求,将数据保存到数据库中
       const { data: res } = await this.$http.put(
         `categories/${this.cateId}/attributes/${row.attr_id}`,

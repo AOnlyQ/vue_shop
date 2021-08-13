@@ -10,11 +10,7 @@
     <el-card>
       <el-row>
         <el-col :span="8">
-          <el-input
-            placeholder="请输入内容"
-            v-model="queryInfo.query"
-            class="input-with-select"
-          >
+          <el-input placeholder="请输入内容" v-model="queryInfo.query" class="input-with-select">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </el-col>
@@ -22,17 +18,12 @@
       <!-- 订单数据表格 -->
       <el-table :data="orderList" style="width: 100%" border stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column prop="order_number" label="订单编号" width="250">
-        </el-table-column>
+        <el-table-column prop="order_number" label="订单编号" width="250"> </el-table-column>
         <el-table-column prop="order_price" label="订单价格"> </el-table-column>
         <el-table-column prop="pay_status" label="是否付款">
           <template slot-scope="scope">
-            <el-tag type="danger" v-if="(scope.row.pay_status = '0')"
-              >未付款</el-tag
-            >
-            <el-tag type="success" v-else-if="(scope.row.pay_status = '1')"
-              >已付款</el-tag
-            >
+            <el-tag type="danger" v-if="(scope.row.pay_status = '0')">未付款</el-tag>
+            <el-tag type="success" v-else-if="(scope.row.pay_status = '1')">已付款</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="is_send" label="是否发货"> </el-table-column>
@@ -42,24 +33,9 @@
           </template>
         </el-table-column>
         <el-table-column label="操作">
-          <el-button
-            type="primary"
-            icon="el-icon-edit"
-            size="mini"
-            @click="addressDialogVisible = true"
-          ></el-button>
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="物流信息"
-            placement="top"
-          >
-            <el-button
-              type="success"
-              icon="el-icon-location-outline"
-              size="mini"
-          
-            ></el-button>
+          <el-button type="primary" icon="el-icon-edit" size="mini" @click="addressDialogVisible = true"></el-button>
+          <el-tooltip class="item" effect="dark" content="物流信息" placement="top">
+            <el-button type="success" icon="el-icon-location-outline" size="mini"></el-button>
           </el-tooltip>
         </el-table-column>
       </el-table>
@@ -76,27 +52,11 @@
       </el-pagination>
     </el-card>
     <!-- 修改地址的对话框 -->
-    <el-dialog
-      title="修改地址"
-      :visible.sync="addressDialogVisible"
-      width="50%"
-      @close="addressDialogClosed"
-    >
-      <el-form
-        :model="addressForm"
-        :rules="addressFormRules"
-        ref="addressFormRef"
-        label-width="100px"
-      >
+    <el-dialog title="修改地址" :visible.sync="addressDialogVisible" width="50%" @close="addressDialogClosed">
+      <el-form :model="addressForm" :rules="addressFormRules" ref="addressFormRef" label-width="100px">
         <el-form-item label="省市区/县" prop="address1">
           <!-- <el-input v-model="addressForm.address1"></el-input> -->
-          <el-cascader
-            :options="cityData"
-            v-model="addressForm.address1"
-            @change="changeProvince"
-            change-on-select
-          >
-          </el-cascader>
+          <el-cascader :options="cityData" v-model="addressForm.address1" @change="changeProvince" change-on-select> </el-cascader>
         </el-form-item>
         <el-form-item label="详细地址" prop="address2">
           <el-input v-model="addressForm.address2"></el-input>
@@ -104,12 +64,9 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addressDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addressDialogVisible = false"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="addressDialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
-    
   </div>
 </template>
 <script>
@@ -139,12 +96,8 @@ export default {
         address2: ''
       },
       addressFormRules: {
-        address1: [
-          { required: true, message: '请选择省市区/县', triggle: 'blur' }
-        ],
-        address2: [
-          { required: true, message: '请输入详细地址', triggle: 'blur' }
-        ]
+        address1: [{ required: true, message: '请选择省市区/县', triggle: 'blur' }],
+        address2: [{ required: true, message: '请输入详细地址', triggle: 'blur' }]
       },
       // 控制物流进度对话框的显示与隐藏
       progressVisible: false,
@@ -160,7 +113,7 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('获取订单数据列表失败！')
       }
-      console.log(res.data)
+      // console.log(res.data)
       this.orderList = res.data.goods
       this.total = res.data.total
       this.$message.success('获取订单数据列表成功！')
@@ -178,10 +131,9 @@ export default {
       this.$refs.addressFormRef.resetFields()
     },
     changeProvince() {
-      console.log(this.cityData)
-      console.log(this.addressForm.address1)
-    },
-    
+      // console.log(this.cityData)
+      // console.log(this.addressForm.address1)
+    }
   }
 }
 </script>

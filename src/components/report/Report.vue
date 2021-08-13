@@ -23,10 +23,11 @@ export default {
     var myChart = echarts.init(document.getElementById('main'))
     // 获取数据
     const { data: res } = await this.$http.get('reports/type/1')
-    if(res.meta.status !== 200){
-        return this.$message.error('获取报表数据失败！')
+    if (res.meta.status !== 200) {
+      return this.$message.error('获取报表数据失败！')
     }
-    var result = _.merge(res.data,this.options)
+    // console.log(res.data);
+    var result = _.merge(res.data, this.options)
     myChart.setOption(result)
   },
   data() {
