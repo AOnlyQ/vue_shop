@@ -257,7 +257,7 @@ export default {
     },
     // 点击按钮，添加分类
     addCate() {
-      this.$srefs.addCateFormRef.validate(async valid => {
+      this.$refs.addCateFormRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.post('categories', this.addCateForm)
         if (res.meta.status !== 201) {

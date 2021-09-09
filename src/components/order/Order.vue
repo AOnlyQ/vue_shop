@@ -58,7 +58,6 @@
               type="success"
               icon="el-icon-location-outline"
               size="mini"
-          
             ></el-button>
           </el-tooltip>
         </el-table-column>
@@ -109,7 +108,20 @@
         >
       </span>
     </el-dialog>
-    
+    <!-- 物流信息的对话框 -->
+    <el-dialog>
+      <!-- <div class="block">
+        <el-timeline :reverse="reverse">
+          <el-timeline-item
+            v-for="(activity, index) in activities"
+            :key="index"
+            :timestamp="activity.timestamp"
+          >
+            {{ activity.content }}
+          </el-timeline-item>
+        </el-timeline>
+      </div> -->
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -180,8 +192,7 @@ export default {
     changeProvince() {
       console.log(this.cityData)
       console.log(this.addressForm.address1)
-    },
-    
+    }
   }
 }
 </script>
