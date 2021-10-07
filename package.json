@@ -9,9 +9,10 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "core-js": "^3.6.5",
     "echarts": "^4.9.0",
-    "element-ui": "^2.5.4",
+    "element-ui": "^2.15.6",
     "joi": "^17.4.0",
     "lodash": "^4.17.21",
     "nprogress": "^0.2.0",
