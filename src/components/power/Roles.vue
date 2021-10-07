@@ -38,9 +38,9 @@
                 </el-row>
               </el-col>
             </el-row>
-            <pre
+            <!-- <pre
               >{{ scope.row }}
-            </pre>
+            </pre> -->
           </template>
         </el-table-column>
         <el-table-column type="index"> </el-table-column>
